@@ -74,7 +74,11 @@ extension ViewController: UITableViewDataSource {
 func resizeImage(_ image: UIImage, width: CGFloat, height: CGFloat) -> UIImage {
     let size = CGSize(width: width, height: height)
     let renderer = UIGraphicsImageRenderer(size: size)
+
     return renderer.image { _ in
-        image.draw(in: CGRect(origin: .zero, size: size))
+        let rect = CGRect(origin: .zero, size: size)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 6)
+        path.addClip()
+        image.draw(in: rect)
     }
 }
